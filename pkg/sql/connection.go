@@ -16,7 +16,7 @@ import (
 type DBer interface {
 	Insert(item interface{}) error
 	Update(id int) error
-	Get(id int) error
+	Get(email string) *gocql.Query
 	Delete(id int) error
 	Close()
 }
@@ -73,8 +73,10 @@ func (d *DB) Update(id int) error {
 	return nil
 }
 
-func (d *DB) Get(id int) error {
-	return nil
+func (d *DB) Get(email string) *gocql.Query {
+	query := d.Client.Query(GetUser, email)
+
+	return query
 }
 
 func (d *DB) Delete(id int) error {

@@ -96,8 +96,6 @@ func (s *Spotify) ProcessDataHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-
 	userID, err := getUserProfile(s.token.AccessToken, s.cfg, log)
 	if err != nil {
 		log.Errorf("Error getting user profile: %v", err)
@@ -136,6 +134,8 @@ func (s *Spotify) ProcessDataHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("Error adding playlist: %v", err), http.StatusInternalServerError)
 		return
 	}
+
+	w.WriteHeader(http.StatusOK)
 }
 
 func getUserProfile(accessToken string, cfg config.GlobalEnv, log logger.Logger) (string, error) {

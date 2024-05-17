@@ -14,5 +14,6 @@ type GlobalEnv struct {
 	ClusterIP    string `envconfig:"cluster_ip"`
 	KeySpace     string `envconfig:"key_space"`
 	BaseHost     string `envconfig:"base_host"`
+	SecretKey    string `envconfig:"secret_key"`
 	AutoSplitVar string `split_words:"true"`
 }

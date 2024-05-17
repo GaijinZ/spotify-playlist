@@ -58,7 +58,7 @@ func main() {
 		log.Infof("Failed to ping to Redis: %v", err)
 	}
 
-	newUserAuth := userAuth.NewUserAuth(DB, ctx)
+	newUserAuth := userAuth.NewUserAuth(ctx, cfg, DB, redisClient)
 	newSpotifyAuth := spotifyAuth.NewSpotifyAuth(cfg, ctx)
 	spotifyHandler := handler.NewSpotifyHandler(*token, ctx, *newSpotifyAuth, cfg)
 
